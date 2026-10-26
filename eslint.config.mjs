@@ -12,6 +12,14 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "dist-electron/**",
+    "electron/**",
+    "design-reference/**",
+    // packages/* are independent workspace packages with their own lint/build pipelines
+    // (see packages/sdk/package.json) — the root config shouldn't lint their build output.
+    "packages/**",
+    // site/ is a standalone Next.js app with its own config and its own @/* alias.
+    "site/**",
   ]),
 ]);
 

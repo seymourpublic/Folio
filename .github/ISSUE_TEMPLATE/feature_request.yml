@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest a capability or improvement
+labels: ["enhancement", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Folio doesn't aim for feature parity with Acrobat — the goal is the set of things people
+        genuinely need, done well. Describing the workflow you're stuck on is more persuasive
+        than naming a feature, so please start there.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task or workflow, not the feature. What are you doing today instead?
+      placeholder: I review contracts and need to compare two revisions side by side to see which clauses changed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+      description: If you have a solution in mind, describe it. It's fine to leave this open-ended.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: How do other tools handle this?
+      description: Prior art is useful, including what you find wrong with those approaches.
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Would you like to work on this?
+      options:
+        - label: I'd be interested in implementing it myself

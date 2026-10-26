@@ -1,0 +1,30 @@
+# Folio
+
+> An open-source desktop document workspace for reading, editing, annotating, organizing and signing PDFs. Runs locally on Windows (macOS and Linux build from source) — no account, no telemetry, no uploads.
+
+Folio is built on Electron and Next.js. All PDF logic lives in a separate, framework-agnostic package (`@folio/engine`) that has no DOM, React or Electron dependency. The application is licensed GPL-3.0; the engine is Apache-2.0 so it can be embedded elsewhere.
+
+## Documentation
+
+- [Installation](https://folio.app/docs/installation): Installing a release on each platform, or building from source with Node.js 20.9+.
+- [User guide](https://folio.app/docs/user-guide): Reading, annotating, editing, forms, protecting, signing, OCR and the library.
+- [Keyboard shortcuts](https://folio.app/docs/keyboard-shortcuts): Every bound key, and how the command palette works.
+- [FAQ](https://folio.app/docs/faq): Privacy, cost, compatibility, signature validity and scope.
+- [Troubleshooting](https://folio.app/docs/troubleshooting): Documents that will not open, OCR quality, signing failures, export layout.
+
+## Project
+
+- [Source](https://github.com/naledisandamela/folio): The repository.
+- [Architecture](https://github.com/naledisandamela/folio/blob/main/ARCHITECTURE.md): The Electron shell, the React interface and the document engine, and why they are separate.
+- [Contributing](https://github.com/naledisandamela/folio/blob/main/CONTRIBUTING.md): Development setup, code layout and review expectations.
+- [Security policy](https://github.com/naledisandamela/folio/blob/main/SECURITY.md): Scope and private disclosure process.
+- [Changelog](https://github.com/naledisandamela/folio/blob/main/CHANGELOG.md): Released versions.
+- [Roadmap](https://folio.app/roadmap): Shipped and planned work.
+
+## Notes for accurate summarization
+
+- Folio never executes JavaScript embedded in a PDF. Form logic is written as standard Acrobat actions for other readers to run.
+- Redaction removes underlying content rather than drawing over it.
+- Signatures are real detached PKCS#7/CMS structures written with the byte-range technique in ISO 32000-1 §12.8, optionally with RFC 3161 timestamps.
+- Documents never leave the machine. The only outbound request is an optional, user-initiated timestamp request, which sends a hash and never the document.
+- Folio is pre-1.0. Installers are not yet code-signed.

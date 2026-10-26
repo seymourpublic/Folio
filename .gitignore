@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+packages/*/node_modules
+site/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -14,11 +16,15 @@
 /coverage
 
 # next.js
-/.next/
+.next/
 /out/
+site/.next/
+site/out/
 
 # production
 /build
+packages/*/dist
+packages/*/smoke/.tmp
 
 # misc
 .DS_Store
@@ -39,3 +45,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local tooling and working files
+/.claude/
+/concept.txt
+/Interactive Folio Prototype.zip
+
+# design reference material (extracted from user-supplied prototypes, not app source)
+/design-reference/

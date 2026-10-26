@@ -1,26 +1,244 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Folio design-system extensions — brand blue + soft variant, status colors + soft
+     variants, a third (fainter) text tier, a subtler border tier, and a modal overlay
+     color, layered on top of the shadcn base tokens above. */
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-foreground-tertiary: var(--foreground-tertiary);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-overlay: var(--overlay);
+
+  /* Theme-reactive shadow recipes (stronger/darker in dark mode) — overrides Tailwind's
+     built-in shadow-sm/md/lg utilities via the indirection below. */
+  --shadow-sm: var(--shadow-sm-value);
+  --shadow-md: var(--shadow-md-value);
+  --shadow-lg: var(--shadow-lg-value);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #F8FAFC;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
+  --primary: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #111827;
+  --muted: #F1F5F9;
+  --muted-foreground: #6B7280;
+  --accent: #F1F5F9;
+  --accent-foreground: #111827;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --destructive-soft: #FEF2F2;
+  --border: #E5E7EB;
+  --border-subtle: #EEF1F4;
+  --border-strong: #D1D5DB;
+  --input: #E5E7EB;
+  --ring: #2563EB;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #2563EB;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EFF6FF;
+  --sidebar-accent-foreground: #2563EB;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #2563EB;
+
+  --brand: #2563EB;
+  --brand-foreground: #FFFFFF;
+  --brand-soft: #EFF6FF;
+  --success: #22C55E;
+  --success-foreground: #FFFFFF;
+  --success-soft: #F0FDF4;
+  --warning: #F59E0B;
+  --warning-foreground: #FFFFFF;
+  --warning-soft: #FFFBEB;
+  --foreground-tertiary: #9CA3AF;
+  --overlay: rgba(15, 23, 42, 0.4);
+  --shadow-sm-value: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md-value: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-lg-value: 0 24px 60px rgba(15, 23, 42, 0.22);
+}
+
+.dark {
+  --background: #0F172A;
+  --foreground: #F9FAFB;
+  --card: #111827;
+  --card-foreground: #F9FAFB;
+  --popover: #111827;
+  --popover-foreground: #F9FAFB;
+  --primary: #60A5FA;
+  --primary-foreground: #0F172A;
+  --secondary: #1A2333;
+  --secondary-foreground: #F9FAFB;
+  --muted: #1A2333;
+  --muted-foreground: #94A3B8;
+  --accent: #1A2333;
+  --accent-foreground: #F9FAFB;
+  --destructive: #F87171;
+  --destructive-foreground: #0F172A;
+  --destructive-soft: rgba(248, 113, 113, 0.14);
+  --border: #1F2937;
+  --border-subtle: #263142;
+  --border-strong: #2B3646;
+  --input: #1F2937;
+  --ring: #60A5FA;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #111827;
+  --sidebar-foreground: #F9FAFB;
+  --sidebar-primary: #60A5FA;
+  --sidebar-primary-foreground: #0F172A;
+  --sidebar-accent: rgba(96, 165, 250, 0.16);
+  --sidebar-accent-foreground: #60A5FA;
+  --sidebar-border: #1F2937;
+  --sidebar-ring: #60A5FA;
+
+  --brand: #60A5FA;
+  --brand-foreground: #0F172A;
+  --brand-soft: rgba(96, 165, 250, 0.16);
+  --success: #34D399;
+  --success-foreground: #0F172A;
+  --success-soft: rgba(52, 211, 153, 0.12);
+  --warning: #FBBF24;
+  --warning-foreground: #0F172A;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --foreground-tertiary: #64748B;
+  --overlay: rgba(0, 0, 0, 0.6);
+  --shadow-sm-value: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md-value: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg-value: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+.pdf-text-layer {
+  line-height: 1;
+  text-align: initial;
+  overflow: clip;
+  opacity: 1;
+  --scale-factor: 1;
+  --min-font-size: 1;
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+  --text-scale-factor: calc(var(--scale-factor) * var(--min-font-size));
+}
+
+.pdf-text-layer span {
+  position: absolute;
+  color: transparent;
+  white-space: pre;
+  transform-origin: 0% 0%;
+  cursor: text;
+  /* pdf.js's TextLayer writes --font-height/--scale-x inline per span (see
+     node_modules/pdfjs-dist/web/pdf_viewer.css); without these two rules to consume them,
+     every span silently falls back to the browser's default 16px font, so its layout box
+     (and therefore any bounding-box math read off it, e.g. click-to-edit / find-replace)
+     stops matching the actual rendered glyph size. */
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  transform: scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+
+.pdf-text-layer ::selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.pdf-text-layer span.pdf-search-hit {
+  background: color-mix(in srgb, yellow 55%, transparent);
+  border-radius: 2px;
+}
+
+.pdf-text-layer-editable span:hover {
+  background: color-mix(in srgb, var(--brand) 20%, transparent);
+  border-radius: 2px;
+  cursor: pointer;
 }

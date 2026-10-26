@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-wash: var(--accent-wash);
+  --color-success: var(--success);
+
+  --font-display: var(--font-geist), "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Editorial rhythm. Sections and hero carry the large values; everything
+     smaller steps down from the same scale. */
+  --spacing-gutter: 1rem;
+  --spacing-group: 1.5rem;
+  --spacing-card: 2rem;
+  --spacing-section: 7.5rem;
+  --spacing-hero: 10rem;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-subtle: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-lift: 0 4px 12px rgba(17, 24, 39, 0.08);
+  --shadow-frame: 0 1px 3px rgba(17, 24, 39, 0.06), 0 12px 32px rgba(17, 24, 39, 0.08);
+}
+
+:root {
+  --background: #fafaf8;
+  --surface: #ffffff;
+  --surface-sunken: #f4f4f1;
+  --primary: #111827;
+  --secondary: #6b7280;
+  --tertiary: #9ca3af;
+  --border: #e5e7eb;
+  --border-strong: #d4d4d0;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-wash: #eff4ff;
+  --success: #22c55e;
+}
+
+.dark {
+  --background: #0d1117;
+  --surface: #141a22;
+  --surface-sunken: #10161d;
+  --primary: #f4f4f2;
+  --secondary: #9aa4b2;
+  --tertiary: #6b7684;
+  --border: #232b36;
+  --border-strong: #313b48;
+  --accent: #5b9aff;
+  --accent-contrast: #0d1117;
+  --accent-wash: #16233a;
+  --success: #3ddc84;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--primary);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* An almost-invisible grid, used sparingly behind the hero. */
+  .grid-field {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 78% 58% at 50% 38%, #000 20%, transparent 78%);
+  }
+
+  /* Underline that slides in from the left on hover. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* Sections fade up 8px as they enter. Purely an entrance; nothing repeats. */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

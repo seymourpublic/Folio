@@ -1,0 +1,36 @@
+/** Single source of truth for every bound keyboard shortcut spec. */
+export const SHORTCUTS = {
+  commandPalette: "mod+k",
+  search: "mod+f",
+  toggleSidebar: "mod+b",
+  download: "mod+s",
+  zoomIn: "mod+=",
+  zoomOut: "mod+-",
+  fitWidth: "mod+0",
+  prevPage: "arrowleft",
+  nextPage: "arrowright",
+  firstPage: "home",
+  lastPage: "end",
+  goBack: "alt+arrowleft",
+  goForward: "alt+arrowright",
+  newTab: "mod+t",
+  closeTab: "mod+w",
+} as const;
+
+export const SHORTCUT_MANIFEST: { label: string; shortcut: string }[] = [
+  { label: "Command palette", shortcut: SHORTCUTS.commandPalette },
+  { label: "Search in document", shortcut: SHORTCUTS.search },
+  { label: "Toggle sidebar", shortcut: SHORTCUTS.toggleSidebar },
+  { label: "Download PDF", shortcut: SHORTCUTS.download },
+  { label: "Zoom in", shortcut: SHORTCUTS.zoomIn },
+  { label: "Zoom out", shortcut: SHORTCUTS.zoomOut },
+  { label: "Zoom to fit width", shortcut: SHORTCUTS.fitWidth },
+  { label: "Previous page", shortcut: SHORTCUTS.prevPage },
+  { label: "Next page", shortcut: SHORTCUTS.nextPage },
+  { label: "First page", shortcut: SHORTCUTS.firstPage },
+  { label: "Last page", shortcut: SHORTCUTS.lastPage },
+  { label: "Go back", shortcut: SHORTCUTS.goBack },
+  { label: "Go forward", shortcut: SHORTCUTS.goForward },
+  { label: "Open new tab", shortcut: SHORTCUTS.newTab },
+  { label: "Close tab", shortcut: SHORTCUTS.closeTab },
+];

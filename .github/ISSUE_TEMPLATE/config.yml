@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/naledisandamela/folio/discussions
+    about: For usage questions, half-formed ideas, or showing what you've built.
+  - name: Report a security vulnerability
+    url: https://github.com/naledisandamela/folio/security/advisories/new
+    about: Please report vulnerabilities privately rather than in a public issue.
+  - name: Documentation
+    url: https://github.com/naledisandamela/folio/tree/main/docs
+    about: Installation, the user guide, keyboard shortcuts, and troubleshooting.

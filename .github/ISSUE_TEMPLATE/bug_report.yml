@@ -1,0 +1,89 @@
+name: Bug report
+description: Something in Folio doesn't work the way it should
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file this. If the bug is a security vulnerability, please
+        [report it privately](https://github.com/naledisandamela/folio/security/advisories/new) instead.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+      placeholder: I opened a signed PDF and the signature panel showed "unsigned", but Acrobat reports it as valid.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a document with...
+        2. Click...
+        3. See...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Folio?
+      options:
+        - Viewing / rendering
+        - Annotation and markup
+        - Editing pages or text
+        - Forms
+        - Signing, encryption or redaction
+        - Conversion or OCR
+        - Library, search or tags
+        - Application shell (windows, files, updates)
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Folio version
+      placeholder: "0.1.0, or the commit SHA if built from source"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install
+    attributes:
+      label: How are you running it?
+      options:
+        - Downloaded release
+        - Built from source (electron:dev)
+        - Built from source (browser, npm run dev)
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 / macOS 15.2 / Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: document
+    attributes:
+      label: The document involved
+      description: |
+        Most rendering, form and signing bugs are file-specific and very hard to reproduce without a sample.
+        If you can attach the PDF, please do. If it's confidential, describe it instead — is it encrypted,
+        tagged, scanned? Which application produced it (Properties → Producer)?
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output
+      description: "Any errors from the developer console (View → Toggle Developer Tools). This will be formatted as code."
+      render: shell
